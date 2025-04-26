@@ -26,5 +26,14 @@ class MovieAdapter(private val movies: List<Movie>) : RecyclerView.Adapter<Movie
         Glide.with(holder.itemView)
             .load("https://image.tmdb.org/t/p/w500${movie.poster_path}")
             .into(holder.binding.imagePoster)
+
+        holder.itemView.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = android.content.Intent(context, DetailActivity::class.java)
+            intent.putExtra("title", movie.title)
+            intent.putExtra("overview", movie.overview)
+            intent.putExtra("posterPath", movie.poster_path)
+            context.startActivity(intent)
+        }
     }
 }
